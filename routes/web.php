@@ -20,3 +20,4 @@ use App\Http\Controllers\HomeController;
 
 
 Route::get('/',[HomeController::class, 'index']);
+Route::get('/product/details/{slug}',[HomeController::class, 'productDetails']);
