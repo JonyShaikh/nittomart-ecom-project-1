@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\controllers\Backend\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,10 @@ Route::get('/product/check-out',[HomeController::class, 'productCheckout']);
 Route::get('/shop-products',[HomeController::class, 'shopProduct']);
 Route::get('/return-product',[HomeController::class, 'returnProduct']);
 Route::get('/privacy-policy',[HomeController::class, 'privacyPolicy']);
+
+Auth::routes();
+
+Route::get('/admin/login',[AdminController::class, 'login']);
+Route::post('/admin/login-access',[AdminController::class, 'loginCheck']);
+
+Route::get('/admin/dashboard', [AdminController::class,'dashboard']);
