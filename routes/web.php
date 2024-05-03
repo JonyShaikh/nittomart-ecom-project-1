@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +35,9 @@ Route::get('/admin/login',[AdminController::class, 'login']);
 Route::post('/admin/login-access',[AdminController::class, 'loginCheck']);
 
 Route::get('/admin/dashboard', [AdminController::class,'dashboard']);
+
+//Category Route
+Route::get('/admin/category/list',[CategoryController::class, 'showCategory']);
+Route::get('/admin/category/create',[CategoryController::class, 'createCategory']);
+Route::post('/admin/category/store',[CategoryController::class, 'storeCategory']);
+Route::get('/admin/category/delete/{id}',[CategoryController::class, 'deleteCategory']);
