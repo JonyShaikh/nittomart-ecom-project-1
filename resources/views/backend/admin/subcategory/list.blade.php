@@ -5,7 +5,7 @@
 <div class="container-fluid">
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Category List</h3>
+            <h3 class="card-title">Sub-Category List</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -13,23 +13,21 @@
                 <thead>
                     <tr>
                         <th>Sl</th>
-                        <th>Image</th>
+                        <th>Sub-Category Name</th>
                         <th>Category Name</th>
                         <th>Action</th>
                       
                     </tr>
                 </thead>
                 <tbody>
-                        @foreach ($categorys as $category)
+                        @foreach ($subCategories as $subcategory)
                         <tr>
                             <td>{{$loop->index+1}}</td>
+                            <td>{{$subcategory->name}}</td>
+                            <td>{{$subcategory->category->name}}</td>
                             <td>
-                                <img src="{{asset('backend/images/category/'.$category->image)}}" alt="category image" height="100" width="100">
-                            </td>
-                            <td>{{$category->name}}</td>
-                            <td>
-                                <a href="{{url('/admin/category/edit/'.$category->id)}}" class="btn btn-primary">Edit</a>
-                                <a href="{{url('/admin/category/delete/'.$category->id)}}" onclick="return confirm('are you sure for deleting')" class="btn btn-danger">Delete</a>
+                                <a href="{{url('/admin/sub-category/edit/'.$subcategory->id)}}" class="btn btn-primary">Edit</a>
+                                <a href="{{url('/admin/sub-category/delete/'.$subcategory->id)}}" onclick="return confirm('are you sure for deleting')" class="btn btn-danger">Delete</a>
                             </td>
                         </tr>
      

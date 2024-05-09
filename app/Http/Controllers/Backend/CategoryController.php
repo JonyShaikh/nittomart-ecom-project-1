@@ -40,6 +40,7 @@ class CategoryController extends Controller
                 }
 
                 $category->save();
+                toastr()->success('successfully Created');
                 return redirect()->back();
             }
         }
@@ -61,14 +62,65 @@ class CategoryController extends Controller
 
    public function deleteCategory ($id)
    {
-        $category = Category::find($id);
+        if(Auth::user()){
+            if(Auth::user()->role==1){
+                $category = Category::find($id);
         
-        if($category->image && file_exists('backend/images/category/'.$category->image)){
-            unlink('backend/images/category/'.$category->image);
+                if($category->image && file_exists('backend/images/category/'.$category->image)){
+                    unlink('backend/images/category/'.$category->image);
+                }
+                $category->delete();
+                toastr()->success('successfully Deleted');
+                return redirect()->back();
+            }
         }
-        $category->delete();
-        return redirect()->back();
        
+   }
+
+   public function editCategory ($id)
+   {
+        if(Auth::user()){
+            if(Auth::user()->role ==1){
+                $category = Category::find($id);
+    
+                return view ('Backend.admin.category.edit',compact('category'));
+            }
+        }
+   }
+
+
+   public function updateCategory (Request $request, $id)
+   {
+        if(Auth::user()){
+            if(Auth::user()->role == 1){
+                $category = Category::find($id);
+
+                $category->name = $request->name;
+                $category->slug = Str::slug($request->name);
+        
+        
+                if(isset($request->image)){
+        
+                    if($category->image && file_exists('backend/images/category/'.$category->image)){
+                        unlink('backend/images/category/'.$category->image);
+                    }
+        
+                    $imageName = rand().'-categoryup-'.'.'.$request->image->extension(); 
+                    $request->image->move('backend/images/category' ,$imageName);
+        
+                    $category->image = $imageName;
+        
+                 }
+        
+                 $category->save();
+                 toastr()->success('successfully updated');
+                 return redirect('/admin/category/list');
+        
+            }
+        }
+
+
+
    }
  
         
