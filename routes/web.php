@@ -24,12 +24,16 @@ use App\Http\Controllers\Backend\SubCategoryController;
 
 
 Route::get('/',[HomeController::class, 'index']);
-Route::get('/product/details/',[HomeController::class, 'productDetails']);
+Route::get('/product/details/{slug}',[HomeController::class, 'productDetails']);
 Route::get('/product/view-cart',[HomeController::class, 'viewCart']);
 Route::get('/product/check-out',[HomeController::class, 'productCheckout']);
 Route::get('/shop-products',[HomeController::class, 'shopProduct']);
 Route::get('/return-product',[HomeController::class, 'returnProduct']);
 Route::get('/privacy-policy',[HomeController::class, 'privacyPolicy']);
+
+//Add to Cart Routes...
+Route::post('/product/addtocart-details/{id}',[HomeController::class,'addtoCartDetails']);
+Route::get('/product/addtocart/{id}',[HomeController::class,'addtoCart']);
 
 Auth::routes();
 
